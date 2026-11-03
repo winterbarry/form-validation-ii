@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("node:path");
-const usersRouter = require("./routes/usersRouter"); // ?
+const usersRouter = require("./routes/usersRouter");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -13,5 +13,5 @@ app.listen(PORT, (error) => {
   if (error) {
     throw error;
   }
-  console.log(`Express app listening on port ${PORT}`);
+  console.log(`Express app listening on port ${PORT}!`);
 });
