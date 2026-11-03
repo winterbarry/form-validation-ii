@@ -5,6 +5,8 @@ const usersRouter = require("./routes/usersRouter");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
+// parse form submissions and make their data available through req.body
 app.use(express.urlencoded({ extended: true }));
 app.use("/", usersRouter);
 
