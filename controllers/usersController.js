@@ -1,11 +1,12 @@
+// import storage module and validation helpers.
 const usersStorage = require("../storages/usersStorage");
-
-// ?
 const { body, validationResult, matchedData } = require("express-validator");
 
+// reusable validation error messages.
 const alphaErr = "must only contain letters.";
 const lengthErr = "must be between 1 and 10 characters.";
 
+// validate and sanitize first and last names.
 const validateUser = [
   body("firstName")
     .trim()
@@ -21,6 +22,7 @@ const validateUser = [
     .withMessage(`Last name ${lengthErr}`),
 ];
 
+// display all stored users.
 exports.usersListGet = (req, res) => {
   res.render("index", {
     title: "User List",
@@ -28,13 +30,14 @@ exports.usersListGet = (req, res) => {
   });
 };
 
-// handle GET requests to /create and display the creation form.
+// display the form for creating a user.
 exports.usersCreateGet = (req, res) => {
   res.render("createUser", {
     title: "Create user",
   });
 };
 
+// validate form data and create a new user.
 exports.usersCreatePost = [
   validateUser,
   (req, res) => {
@@ -52,6 +55,7 @@ exports.usersCreatePost = [
   },
 ];
 
+// find a user and display their update form.
 exports.usersUpdateGet = (req, res) => {
   const user = usersStorage.getUser(req.params.id);
   res.render("updateUser", {
@@ -60,6 +64,7 @@ exports.usersUpdateGet = (req, res) => {
   });
 };
 
+// validate submitted data and update the user.
 exports.usersUpdatePost = [
   validateUser,
   (req, res) => {
@@ -78,6 +83,7 @@ exports.usersUpdatePost = [
   },
 ];
 
+// delete the selected user
 exports.usersDeletePost = (req, res) => {
   usersStorage.deleteUser(req.params.id);
   res.redirect("/");
