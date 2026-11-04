@@ -15,4 +15,6 @@ usersRouter.get("/:id/update", usersController.usersUpdateGet);
 // handle form update
 usersRouter.post("/:id/update", usersController.usersUpdatePost);
 
+usersRouter.post("/:id/delete", usersController.usersDeletePost);
+
 module.exports = usersRouter;
